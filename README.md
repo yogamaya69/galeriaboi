@@ -112,7 +112,11 @@
 <body class="antialiased selection:bg-gallery-black selection:text-white">
 
     <nav class="fixed top-0 w-full z-40 p-6 md:p-10 flex justify-between items-center mix-blend-difference text-white pointer-events-none">
-        <div class="text-2xl font-serif tracking-widest pointer-events-auto cursor-pointer" onclick="window.scrollTo(0,0)">GALERIA BOI</div>
+        <div class="pointer-events-auto cursor-pointer flex items-center" onclick="window.scrollTo(0,0)">
+            <!-- SUBSTITUA O SRC PELO CAMINHO DA SUA LOGO PNG BRANCA -->
+            <!-- O mix-blend-difference fará ela ficar preta em fundos claros e branca em fundos escuros automaticamente -->
+            <img src="https://placehold.co/200x50/transparent/FFFFFF?text=SUA+MARCA" alt="Logo Galeria Boi" class="h-5 md:h-7 w-auto object-contain">
+        </div>
         <div class="hidden md:flex gap-8 text-sm font-sans tracking-widest uppercase pointer-events-auto">
             <a href="#acervo" class="hover:opacity-60 transition-opacity">Acervo</a>
             <a href="#sobre" class="hover:opacity-60 transition-opacity">A Galeria</a>
@@ -165,7 +169,8 @@
     <footer id="sobre" class="bg-gallery-offwhite py-24 px-6 lg:px-12 mt-24">
         <div class="max-w-screen-2xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 font-sans">
             <div class="md:col-span-1">
-                <h2 class="text-2xl font-serif tracking-widest mb-6">GALERIA BOI</h2>
+                <!-- SUBSTITUA O SRC PELO CAMINHO DA SUA LOGO PNG ESCURA/PRETA -->
+                <img src="https://placehold.co/200x50/transparent/111111?text=SUA+MARCA" alt="Logo Galeria Boi" class="h-6 md:h-8 w-auto object-contain mb-6">
                 <p class="text-sm text-gallery-gray font-light">Exposições imersivas e curatoriais.</p>
             </div>
             <div class="md:col-span-1">
@@ -368,88 +373,4 @@
 
                     <!-- Mini Galeria Horizontal -->
                     <div class="w-full pl-6 lg:pl-12 text-left">
-                        <div class="horizontal-scroll flex gap-6 pb-6 snap-x">
-                            ${artworksHTML}
-                        </div>
-                    </div>
-                </div>
-            `;
-            container.insertAdjacentHTML('beforeend', artistHTML);
-        });
-
-        // --- 3. LÓGICA DO LIGHTBOX ---
-        const lightbox = document.getElementById('lightbox');
-        const lbImg = document.getElementById('lb-image');
-        
-        function updateLightbox() {
-            const data = allArtworks[currentLightboxIndex];
-            
-            // Efeito fade out/in para troca suave
-            lbImg.style.opacity = '0';
-            setTimeout(() => {
-                lbImg.src = data.img;
-                document.getElementById('lb-artist').innerText = data.artist;
-                document.getElementById('lb-title').innerText = data.title;
-                document.getElementById('lb-year').innerText = data.year;
-                document.getElementById('lb-technique').innerText = data.technique;
-                document.getElementById('lb-dimensions').innerText = data.dimensions;
-                lbImg.style.opacity = '1';
-            }, 150);
-        }
-
-        window.openLightbox = function(globalIndex) {
-            currentLightboxIndex = globalIndex;
-            updateLightbox();
-            lightbox.classList.remove('hidden-modal');
-            document.body.style.overflow = 'hidden'; 
-        }
-
-        window.closeLightbox = function() {
-            lightbox.classList.add('hidden-modal');
-            document.body.style.overflow = 'auto'; 
-        }
-
-        window.nextImage = function(e) {
-            if(e) e.stopPropagation();
-            currentLightboxIndex = (currentLightboxIndex + 1) % allArtworks.length;
-            updateLightbox();
-        }
-
-        window.prevImage = function(e) {
-            if(e) e.stopPropagation();
-            currentLightboxIndex = (currentLightboxIndex - 1 + allArtworks.length) % allArtworks.length;
-            updateLightbox();
-        }
-
-        // Eventos de teclado
-        document.addEventListener('keydown', (e) => {
-            if (lightbox.classList.contains('hidden-modal')) return;
-            if (e.key === "Escape") closeLightbox();
-            if (e.key === "ArrowRight") nextImage();
-            if (e.key === "ArrowLeft") prevImage();
-        });
-
-        // --- 4. ANIMAÇÕES DE SCROLL E PARALLAX ---
-        const revealElements = document.querySelectorAll('.reveal-up');
-        const revealObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { root: null, threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
-
-        revealElements.forEach(el => revealObserver.observe(el));
-
-        // Parallax na Hero
-        const heroImage = document.getElementById('heroImage');
-        window.addEventListener('scroll', () => {
-            const scrollY = window.scrollY;
-            if (scrollY < window.innerHeight) {
-                heroImage.style.transform = `translateY(${scrollY * 0.25}px)`;
-            }
-        });
-    </script>
-</body>
-</html>
+                        <div class="horizontal-scroll flex gap
