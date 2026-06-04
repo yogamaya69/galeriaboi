@@ -149,8 +149,8 @@
     <nav id="navbar" class="fixed top-0 w-full z-[99] transition-all duration-300 pointer-events-none">
         <div id="nav-container" class="flex justify-between items-center px-6 py-5 md:px-12 md:py-8 w-full transition-all duration-300 pointer-events-auto">
             
-            <!-- Logo em Imagem (mix-blend-multiply faz o fundo branco do SVG sumir) -->
-            <img id="main-logo" src="./logoboi.svg" alt="" class="h-10 md:h-14 w-auto object-contain cursor-pointer mix-blend-multiply transition-all duration-300 origin-left" onclick="window.scrollTo(0,0)">
+            <!-- Logo em Imagem aumentada (h-12 no mobile, h-20 no desktop) -->
+            <img id="main-logo" src="./logoboi.svg" alt="" class="h-12 md:h-20 w-auto object-contain cursor-pointer mix-blend-multiply transition-all duration-300 origin-left" onclick="window.scrollTo(0,0)">
             
             <!-- Desktop Links -->
             <div id="desktop-links" class="hidden md:flex gap-8 text-sm font-sans tracking-widest uppercase mix-blend-difference text-white transition-colors duration-300">
@@ -225,8 +225,8 @@
     <footer id="sobre" class="bg-gallery-black text-white py-24 px-8 md:px-16 mt-12 w-full">
         <div class="max-w-screen-2xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 font-sans">
             <div class="md:col-span-2">
-                <!-- Logo em Imagem no Rodapé - Usando SVG e invert/mix-blend para apagar fundo perfeitamente -->
-                <img src="./logoboi.svg" alt="Logo Galeria Boi" class="h-12 md:h-16 w-auto mb-8 object-contain origin-left invert mix-blend-screen">
+                <!-- Logo em Imagem no Rodapé aumentada (h-16 no mobile, h-24 no desktop) -->
+                <img src="./logoboi.svg" alt="Logo Galeria Boi" class="h-16 md:h-24 w-auto mb-8 object-contain origin-left invert mix-blend-screen">
                 <p class="text-base text-gray-400 font-light max-w-md leading-relaxed">Dedicada a expor as narrativas visuais mais instigantes da arte contemporânea, com exposições imersivas e curatoriais focadas no diálogo entre a materialidade e o espaço.</p>
             </div>
             
