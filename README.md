@@ -145,21 +145,21 @@
 </head>
 <body class="antialiased selection:bg-gallery-black selection:text-white">
 
-    <!-- Navegação (Com Z-index elevado para garantir que aparece sempre no topo) -->
-    <nav id="navbar" class="fixed top-0 w-full z-[99] transition-all duration-300 mix-blend-difference text-white pointer-events-none">
+    <!-- Navegação (Refatorada para remover fundo branco da logo) -->
+    <nav id="navbar" class="fixed top-0 w-full z-[99] transition-all duration-300 pointer-events-none">
         <div id="nav-container" class="flex justify-between items-center px-6 py-5 md:px-12 md:py-8 w-full transition-all duration-300 pointer-events-auto">
             
-            <!-- Logo em Imagem -->
-            <img id="main-logo" src="./logoboi.svg" alt="" class="h-10 md:h-14 w-auto object-contain cursor-pointer invert mix-blend-screen transition-all duration-300 origin-left" onclick="window.scrollTo(0,0)">
+            <!-- Logo em Imagem (mix-blend-multiply faz o fundo branco do SVG sumir) -->
+            <img id="main-logo" src="./logoboi.svg" alt="" class="h-10 md:h-14 w-auto object-contain cursor-pointer mix-blend-multiply transition-all duration-300 origin-left" onclick="window.scrollTo(0,0)">
             
             <!-- Desktop Links -->
-            <div class="hidden md:flex gap-8 text-sm font-sans tracking-widest uppercase">
+            <div id="desktop-links" class="hidden md:flex gap-8 text-sm font-sans tracking-widest uppercase mix-blend-difference text-white transition-colors duration-300">
                 <a href="#acervo" class="hover:opacity-60 transition-opacity">Acervo</a>
                 <a href="#sobre" class="hover:opacity-60 transition-opacity">A Galeria</a>
             </div>
             
             <!-- Mobile Menu Button -->
-            <div class="md:hidden">
+            <div id="mobile-btn" class="md:hidden mix-blend-difference text-white transition-colors duration-300">
                 <button onclick="toggleMobileMenu()" class="uppercase text-xs tracking-widest hover:opacity-70 transition-opacity">Menu</button>
             </div>
         </div>
@@ -225,21 +225,25 @@
     <footer id="sobre" class="bg-gallery-black text-white py-24 px-8 md:px-16 mt-12 w-full">
         <div class="max-w-screen-2xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 font-sans">
             <div class="md:col-span-2">
-                <!-- Logo em Imagem no Rodapé -->
-                <img src="./logoboi.png" alt="Logo Galeria Boi" class="h-12 md:h-16 w-auto mb-8 object-contain origin-left brightness-0 invert">
+                <!-- Logo em Imagem no Rodapé - Usando SVG e invert/mix-blend para apagar fundo perfeitamente -->
+                <img src="./logoboi.svg" alt="Logo Galeria Boi" class="h-12 md:h-16 w-auto mb-8 object-contain origin-left invert mix-blend-screen">
                 <p class="text-base text-gray-400 font-light max-w-md leading-relaxed">Dedicada a expor as narrativas visuais mais instigantes da arte contemporânea, com exposições imersivas e curatoriais focadas no diálogo entre a materialidade e o espaço.</p>
             </div>
-            <div class="md:col-span-1">
-                <h4 class="uppercase tracking-widest text-xs font-semibold mb-6 text-white">Localização</h4>
-                <p class="text-sm text-gray-400 font-light leading-relaxed">
+            
+            <!-- Coluna Localização com Diagramação Forçada -->
+            <div class="md:col-span-1 flex flex-col items-start text-left w-full">
+                <h4 class="uppercase tracking-widest text-xs font-semibold mb-6 text-white w-full">Localização</h4>
+                <p class="text-sm text-gray-400 font-light leading-relaxed w-full">
                     Travessa Mestre Vitalino, 9a<br>
                     Alto do Moura, Caruaru - PE<br>
                     Ter - Sáb, 11h às 19h
                 </p>
             </div>
-            <div class="md:col-span-1">
-                <h4 class="uppercase tracking-widest text-xs font-semibold mb-6 text-white">Contato</h4>
-                <ul class="text-sm text-gray-400 font-light space-y-3">
+            
+            <!-- Coluna Contato com Diagramação Forçada -->
+            <div class="md:col-span-1 flex flex-col items-start text-left w-full">
+                <h4 class="uppercase tracking-widest text-xs font-semibold mb-6 text-white w-full">Contato</h4>
+                <ul class="text-sm text-gray-400 font-light space-y-3 w-full p-0 m-0">
                     <li><a href="mailto:contato@galeriaboi.com" class="hover:text-white transition-colors">contato@galeriaboi.com</a></li>
                     <li><a href="#" class="hover:text-white transition-colors">+55 11 9999-0000</a></li>
                     <li><a href="https://www.instagram.com/galeriaboi/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Instagram</a></li>
@@ -382,13 +386,12 @@
                     
                     let imgUrl = `https://images.unsplash.com/photo-${imgBaseId}?auto=format&fit=crop&w=600&h=800&q=80&sig=${uniqueSig}`;
                     
-                    // --- MUDANÇA AQUI: Automatiza as imagens do Tony (01 até 10) ---
+                    // --- Automatiza as imagens do Tony (01 até 10) ---
                     if (artistIndex === 0) {
-                        // PadStart garante que os números de 1 a 9 fiquem como "01", "02", etc.
                         const imgNumber = i.toString().padStart(2, '0');
                         imgUrl = `./tonyobra${imgNumber}.webp`;
                     }
-                    // ---------------------------------------------------------------------------------
+                    // --------------------------------------------------
                     
                     const artwork = {
                         globalIndex: allArtworks.length, 
@@ -458,7 +461,7 @@
                 container.insertAdjacentHTML('beforeend', artistHTML);
             });
 
-            // --- DRAG TO SCROLL (Arraste com o Mouse) ---
+            // --- DRAG TO SCROLL ---
             const scrollContainers = document.querySelectorAll('.horizontal-scroll');
             scrollContainers.forEach(el => {
                 let isDown = false;
@@ -548,7 +551,7 @@
                 }
             }
 
-            // --- 5. EVENTOS GERAIS (Teclado, Scroll, Observer) ---
+            // --- 5. EVENTOS GERAIS ---
             document.addEventListener('keydown', (e) => {
                 if (!lightbox.classList.contains('hidden-modal')) {
                     if (e.key === "Escape") closeLightbox();
@@ -569,11 +572,12 @@
 
             revealElements.forEach(el => revealObserver.observe(el));
 
-            // Efeito da Navbar e Parallax otimizado
+            // Efeito da Navbar simplificado para corrigir o bug do fundo branco
             const heroImage = document.getElementById('heroImage');
             const navbar = document.getElementById('navbar');
             const navContainer = document.getElementById('nav-container');
-            const mainLogo = document.getElementById('main-logo');
+            const desktopLinks = document.getElementById('desktop-links');
+            const mobileBtn = document.getElementById('mobile-btn');
             let ticking = false;
 
             window.addEventListener('scroll', () => {
@@ -581,27 +585,30 @@
                     window.requestAnimationFrame(() => {
                         const scrollY = window.scrollY;
 
-                        // Transformação simplificada e infalível da Navbar
                         if (scrollY > 50) {
-                            navbar.classList.remove('mix-blend-difference', 'text-white');
-                            navbar.classList.add('bg-white/60', 'backdrop-blur-lg', 'text-gallery-black', 'border-b', 'border-gray-200', 'shadow-sm');
+                            navbar.classList.add('bg-white/90', 'backdrop-blur-md', 'border-b', 'border-gray-200', 'shadow-sm');
                             
                             navContainer.classList.remove('py-5', 'md:py-8');
                             navContainer.classList.add('py-3', 'md:py-4');
                             
-                            // Remove a inversão e apaga o fundo branco da imagem
-                            mainLogo.classList.remove('invert', 'mix-blend-screen');
-                            mainLogo.classList.add('mix-blend-multiply');
+                            // Os links perdem a cor invertida e ficam cinza/preto no fundo branco
+                            desktopLinks.classList.remove('mix-blend-difference', 'text-white');
+                            desktopLinks.classList.add('text-gallery-black');
+                            
+                            mobileBtn.classList.remove('mix-blend-difference', 'text-white');
+                            mobileBtn.classList.add('text-gallery-black');
                         } else {
-                            navbar.classList.add('mix-blend-difference', 'text-white');
-                            navbar.classList.remove('bg-white/60', 'backdrop-blur-lg', 'text-gallery-black', 'border-b', 'border-gray-200', 'shadow-sm');
+                            navbar.classList.remove('bg-white/90', 'backdrop-blur-md', 'border-b', 'border-gray-200', 'shadow-sm');
                             
                             navContainer.classList.add('py-5', 'md:py-8');
                             navContainer.classList.remove('py-3', 'md:py-4');
                             
-                            // Inverte a imagem e apaga o fundo "preto" gerado pela inversão
-                            mainLogo.classList.add('invert', 'mix-blend-screen');
-                            mainLogo.classList.remove('mix-blend-multiply');
+                            // Links voltam a inverter de cor para poderem ser lidos sobre a foto Hero
+                            desktopLinks.classList.add('mix-blend-difference', 'text-white');
+                            desktopLinks.classList.remove('text-gallery-black');
+                            
+                            mobileBtn.classList.add('mix-blend-difference', 'text-white');
+                            mobileBtn.classList.remove('text-gallery-black');
                         }
 
                         // Parallax
