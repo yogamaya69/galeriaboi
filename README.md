@@ -149,8 +149,8 @@
     <nav id="navbar" class="fixed top-0 w-full z-[99] transition-all duration-300 pointer-events-none">
         <div id="nav-container" class="flex justify-between items-center px-6 py-5 md:px-12 md:py-8 w-full transition-all duration-300 pointer-events-auto">
             
-            <!-- Logo em Imagem (Começa com apenas invert para ficar branca e manter fundo transparente) -->
-            <img id="main-logo" src="./logoboi.svg" alt="Galeria Boi" class="h-12 md:h-20 w-auto object-contain cursor-pointer transition-all duration-300 origin-left invert" onclick="window.scrollTo(0,0)">
+            <!-- Logo em Imagem (Começa com invert e mix-blend-screen para apagar o fundo preto absoluto gerado) -->
+            <img id="main-logo" src="./logoboi.svg" alt="Galeria Boi" class="h-12 md:h-20 w-auto object-contain cursor-pointer transition-all duration-300 origin-left invert mix-blend-screen" onclick="window.scrollTo(0,0)">
             
             <!-- Desktop Links -->
             <div id="desktop-links" class="hidden md:flex gap-8 text-sm font-sans tracking-widest uppercase mix-blend-difference text-white transition-colors duration-300">
@@ -225,8 +225,8 @@
     <footer id="sobre" class="bg-gallery-black text-white py-24 px-8 md:px-16 mt-12 w-full">
         <div class="max-w-screen-2xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 font-sans">
             <div class="md:col-span-2">
-                <!-- Logo no Rodapé usando apenas filtro invert -->
-                <img src="./logoboi.svg" alt="Logo Galeria Boi" class="h-16 md:h-24 w-auto mb-8 object-contain origin-left invert">
+                <!-- Logo no Rodapé - mix-blend-screen apaga o fundo preto #000 gerado pelo invert, fundindo com o #111 do rodapé -->
+                <img src="./logoboi.svg" alt="Logo Galeria Boi" class="h-16 md:h-24 w-auto mb-8 object-contain origin-left invert mix-blend-screen">
                 <p class="text-base text-gray-400 font-light max-w-md leading-relaxed">Dedicada a expor as narrativas visuais mais instigantes da arte contemporânea, com exposições imersivas e curatoriais focadas no diálogo entre a materialidade e o espaço.</p>
             </div>
             
@@ -568,7 +568,7 @@
 
             revealElements.forEach(el => revealObserver.observe(el));
 
-            // Efeito da Navbar ajustado usando apenas filtros CSS simples
+            // Efeito da Navbar
             const heroImage = document.getElementById('heroImage');
             const navbar = document.getElementById('navbar');
             const navContainer = document.getElementById('nav-container');
@@ -594,8 +594,9 @@
                             mobileBtn.classList.remove('mix-blend-difference', 'text-white');
                             mobileBtn.classList.add('text-gallery-black');
 
-                            // Menu com fundo branco: A logo perde o invert para voltar a ficar preta natural
-                            mainLogo.classList.remove('invert');
+                            // Menu com fundo branco: mix-blend-multiply faz o fundo branco do SVG ficar transparente e a logo continuar preta
+                            mainLogo.classList.remove('invert', 'mix-blend-screen');
+                            mainLogo.classList.add('mix-blend-multiply');
                         } else {
                             navbar.classList.remove('bg-white/90', 'backdrop-blur-md', 'border-b', 'border-gray-200', 'shadow-sm');
                             
@@ -608,8 +609,9 @@
                             mobileBtn.classList.add('mix-blend-difference', 'text-white');
                             mobileBtn.classList.remove('text-gallery-black');
 
-                            // Topo da página: A logo recebe apenas invert para ficar branca e manter a transparência
-                            mainLogo.classList.add('invert');
+                            // Topo da página: invert deixa branco, mix-blend-screen apaga o fundo "preto" gerado pelo invert
+                            mainLogo.classList.remove('mix-blend-multiply');
+                            mainLogo.classList.add('invert', 'mix-blend-screen');
                         }
 
                         // Parallax
