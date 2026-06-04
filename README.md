@@ -150,7 +150,7 @@
         <div id="nav-container" class="flex justify-between items-center px-6 py-5 md:px-12 md:py-8 w-full transition-all duration-300 pointer-events-auto">
             
             <!-- Logo em Imagem -->
-            <img id="main-logo" src="./logoboi.png" alt="" class="h-10 md:h-14 w-auto object-contain cursor-pointer invert mix-blend-screen transition-all duration-300 origin-left" onclick="window.scrollTo(0,0)">
+            <img id="main-logo" src="./logoboi.svg" alt="" class="h-10 md:h-14 w-auto object-contain cursor-pointer invert mix-blend-screen transition-all duration-300 origin-left" onclick="window.scrollTo(0,0)">
             
             <!-- Desktop Links -->
             <div class="hidden md:flex gap-8 text-sm font-sans tracking-widest uppercase">
