@@ -33,13 +33,26 @@
     </script>
 
     <style>
-        body {
+        /* --- HACKS ANTI-JEKYLL PARA O GITHUB PAGES --- */
+        /* Estas linhas forçam o Github a não esmagar o nosso layout ao centro */
+        body, html {
+            margin: 0 !important;
+            padding: 0 !important;
+            max-width: 100% !important;
             background-color: #fcfcfc;
             color: #111111;
             overflow-x: hidden;
         }
+        .wrapper, .container-lg, main.page-content, .markdown-body { 
+            max-width: 100% !important; 
+            margin: 0 !important; 
+            padding: 0 !important; 
+        }
+        .site-header, .site-footer, header.header { 
+            display: none !important; 
+        }
 
-        /* Custom Scrollbar */
+        /* --- Custom Scrollbar --- */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -54,29 +67,29 @@
             background: #9ca3af;
         }
 
-        /* Scroll Horizontal das Mini Galerias */
+        /* --- Scroll Horizontal das Mini Galerias --- */
         .horizontal-scroll {
             overflow-x: auto;
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
-            scrollbar-width: none; /* Firefox */
+            scrollbar-width: none;
             cursor: grab;
         }
         .horizontal-scroll:active {
             cursor: grabbing;
         }
         .horizontal-scroll.is-dragging {
-            scroll-behavior: auto; /* Remove suavidade para arrastar sem delay */
-            scroll-snap-type: none; /* Desativa o snap enquanto arrasta */
+            scroll-behavior: auto;
+            scroll-snap-type: none;
         }
         .horizontal-scroll.is-dragging > * {
-            pointer-events: none; /* Evita cliques acidentais na obra ao soltar o mouse */
+            pointer-events: none;
         }
         .horizontal-scroll::-webkit-scrollbar {
-            display: none; /* Chrome/Safari */
+            display: none;
         }
 
-        /* Animações de entrada */
+        /* --- Animações de entrada --- */
         .reveal-up {
             opacity: 0;
             transform: translateY(40px);
@@ -87,19 +100,22 @@
             transform: translateY(0);
         }
 
-        /* Hero Image Parallax Box */
+        /* --- Hero Image Parallax Box --- */
         .hero-img-container {
             clip-path: inset(0);
         }
         .hero-img {
-            height: 120%;
+            position: absolute;
+            top: -10%;
+            left: 0;
             width: 100%;
+            height: 120%;
             object-fit: cover;
             transform-origin: center;
             will-change: transform;
         }
 
-        /* Efeito de profundidade nas obras */
+        /* --- Efeito de profundidade nas obras --- */
         .artwork-card img {
             transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             will-change: transform;
@@ -116,21 +132,11 @@
             opacity: 1;
         }
 
-        /* Lightbox */
-        #lightbox {
-            transition: opacity 0.4s ease, visibility 0.4s ease;
-        }
-        #lightbox.hidden-modal {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
-
-        /* Menu Mobile */
-        #mobile-menu {
+        /* --- Lightbox e Menu --- */
+        #lightbox, #mobile-menu {
             transition: opacity 0.3s ease, visibility 0.3s ease;
         }
-        #mobile-menu.hidden-menu {
+        .hidden-modal, .hidden-menu {
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
@@ -139,25 +145,29 @@
 </head>
 <body class="antialiased selection:bg-gallery-black selection:text-white">
 
-    <!-- Navegação -->
-    <nav id="navbar" class="fixed top-0 w-full z-40 p-6 md:p-10 flex justify-between items-center mix-blend-difference text-white pointer-events-none transition-all duration-300">
-        <!-- Logo em Imagem -->
-        <img id="main-logo" src="./download.png" alt="" class="h-12 md:h-16 w-auto object-contain pointer-events-auto cursor-pointer invert transition-all duration-300" onclick="window.scrollTo(0,0)">
-        
-        <!-- Desktop Links -->
-        <div class="hidden md:flex gap-8 text-sm font-sans tracking-widest uppercase pointer-events-auto">
-            <a href="#acervo" class="hover:opacity-60 transition-opacity">Acervo</a>
-            <a href="#sobre" class="hover:opacity-60 transition-opacity">A Galeria</a>
-        </div>
-        
-        <!-- Mobile Menu Button -->
-        <div class="pointer-events-auto md:hidden">
-            <button onclick="toggleMobileMenu()" class="uppercase text-xs tracking-widest hover:opacity-70 transition-opacity">Menu</button>
+    <!-- Navegação (Com Z-index elevado para garantir que aparece sempre no topo) -->
+    <nav id="navbar" class="fixed top-0 w-full z-[99] transition-all duration-300 mix-blend-difference text-white pointer-events-none">
+        <div id="nav-container" class="flex justify-between items-center px-6 py-5 md:px-12 md:py-8 w-full transition-all duration-300 pointer-events-auto">
+            
+            <!-- Logo em Imagem -->
+            <!-- Use object-contain e h-10/12 para garantir que a logo não distorce a barra -->
+            <img id="main-logo" src="./download.png" alt="Logo Galeria Boi" class="h-10 md:h-12 w-auto object-contain cursor-pointer invert transition-all duration-300" onclick="window.scrollTo(0,0)">
+            
+            <!-- Desktop Links -->
+            <div class="hidden md:flex gap-8 text-sm font-sans tracking-widest uppercase">
+                <a href="#acervo" class="hover:opacity-60 transition-opacity">Acervo</a>
+                <a href="#sobre" class="hover:opacity-60 transition-opacity">A Galeria</a>
+            </div>
+            
+            <!-- Mobile Menu Button -->
+            <div class="md:hidden">
+                <button onclick="toggleMobileMenu()" class="uppercase text-xs tracking-widest hover:opacity-70 transition-opacity">Menu</button>
+            </div>
         </div>
     </nav>
 
     <!-- Menu Mobile Overlay -->
-    <div id="mobile-menu" class="hidden-menu fixed inset-0 z-50 bg-gallery-black text-white flex flex-col justify-center items-center">
+    <div id="mobile-menu" class="hidden-menu fixed inset-0 z-[100] bg-gallery-black text-white flex flex-col justify-center items-center">
         <button onclick="toggleMobileMenu()" class="absolute top-6 right-6 p-4 uppercase text-xs tracking-widest opacity-70 hover:opacity-100">Fechar</button>
         <div class="flex flex-col gap-10 text-center font-serif text-3xl">
             <a href="#acervo" onclick="toggleMobileMenu()" class="hover:text-gallery-gray transition-colors">Acervo</a>
@@ -166,10 +176,10 @@
         </div>
     </div>
 
-    <!-- Hero Section -->
-    <header class="min-h-screen flex flex-col lg:flex-row relative">
-        <div class="w-full lg:w-4/12 min-h-screen flex flex-col justify-center px-8 md:px-16 pt-32 pb-16 lg:pt-0 lg:pb-0 z-10 bg-gallery-white">
-            <div class="max-w-sm reveal-up active">
+    <!-- Hero Section (Adaptada para Grid e 100% Web) -->
+    <header class="w-full min-h-screen flex flex-col lg:flex-row relative bg-gallery-white">
+        <div class="w-full lg:w-[35%] flex flex-col justify-center px-8 md:px-16 pt-32 pb-16 lg:py-0 z-10 min-h-[60vh] lg:min-h-screen">
+            <div class="max-w-sm reveal-up active mx-auto lg:mx-0 w-full">
                 <p class="text-gallery-gray text-xs tracking-[0.2em] uppercase mb-4">Acervo Permanente</p>
                 <h1 class="text-5xl md:text-6xl font-serif leading-tight mb-8">10 Vozes.<br>100 Obras.</h1>
                 <p class="font-sans text-gallery-gray font-light leading-relaxed mb-10 text-sm">
@@ -182,7 +192,7 @@
             </div>
         </div>
 
-        <div class="w-full lg:w-8/12 h-[60vh] lg:h-screen overflow-hidden relative hero-img-container bg-gray-100">
+        <div class="w-full lg:w-[65%] h-[50vh] lg:h-screen relative overflow-hidden bg-gray-100 hero-img-container">
             <img src="https://images.unsplash.com/photo-1577720580479-7d839d829c73?q=80&w=2000&auto=format&fit=crop" 
                  alt="Interior da Galeria de Arte" 
                  class="hero-img" 
@@ -191,30 +201,30 @@
     </header>
 
     <!-- Seção Principal: Artistas e Mini Galerias -->
-    <section id="acervo" class="pt-24 pb-16 bg-gallery-white">
-        <div class="max-w-[1800px] mx-auto">
+    <section id="acervo" class="pt-24 pb-16 bg-gallery-white w-full">
+        <div class="max-w-[1800px] mx-auto w-full">
             
             <div class="text-center mb-24 px-6 reveal-up">
                 <h2 class="text-3xl md:text-4xl font-serif mb-4">Nossos Artistas</h2>
                 <div class="flex items-center justify-center gap-4 text-gallery-gray">
                     <span class="text-lg">←</span>
-                    <p class="font-sans font-light text-xs uppercase tracking-widest">Deslize as obras horizontalmente</p>
+                    <p class="font-sans font-light text-xs uppercase tracking-widest">Deslize ou arraste as obras horizontalmente</p>
                     <span class="text-lg">→</span>
                 </div>
             </div>
 
             <!-- O JavaScript injetará os 10 artistas aqui -->
-            <div id="artists-container" class="flex flex-col gap-16 md:gap-24"></div>
+            <div id="artists-container" class="flex flex-col gap-16 md:gap-24 w-full"></div>
 
         </div>
     </section>
 
     <!-- Rodapé -->
-    <footer id="sobre" class="bg-gallery-offwhite py-24 px-8 md:px-16 mt-12 border-t border-gray-200">
+    <footer id="sobre" class="bg-gallery-offwhite py-24 px-8 md:px-16 mt-12 border-t border-gray-200 w-full">
         <div class="max-w-screen-2xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 font-sans">
             <div class="md:col-span-2">
                 <!-- Logo em Imagem no Rodapé -->
-                <img src="./download.png" alt="" class="h-12 w-auto mb-6 object-contain">
+                <img src="./download.png" alt="Logo Galeria Boi" class="h-12 w-auto mb-6 object-contain">
                 <p class="text-sm text-gallery-gray font-light max-w-sm">Dedicada a expor as narrativas visuais mais instigantes da arte contemporânea, com exposições imersivas e curatoriais focadas no diálogo entre a materialidade e o espaço.</p>
             </div>
             <div class="md:col-span-1">
@@ -236,14 +246,14 @@
         </div>
         <div class="max-w-screen-2xl mx-auto mt-24 pt-8 border-t border-gray-200 text-xs text-gallery-gray flex flex-col md:flex-row justify-between items-center gap-4">
             <p>&copy; 2026 Galeria Boi. Todos os direitos reservados.</p>
-            <p>Design aprimorado</p>
+            <p>Design web otimizado</p>
         </div>
     </footer>
 
     <!-- Modal Tela Cheia (Lightbox) -->
-    <div id="lightbox" class="hidden-modal fixed inset-0 z-50 bg-gallery-white flex flex-col lg:flex-row h-[100dvh]">
+    <div id="lightbox" class="hidden-modal fixed inset-0 z-[110] bg-gallery-white flex flex-col lg:flex-row h-[100dvh]">
         <!-- Botão Fechar -->
-        <button aria-label="Fechar galeria" onclick="closeLightbox()" class="absolute top-4 right-4 lg:top-8 lg:right-8 z-50 p-4 group cursor-pointer bg-white/50 lg:bg-transparent rounded-full backdrop-blur-md lg:backdrop-blur-none">
+        <button aria-label="Fechar galeria" onclick="closeLightbox()" class="absolute top-4 right-4 lg:top-8 lg:right-8 z-[120] p-4 group cursor-pointer bg-white/50 lg:bg-transparent rounded-full backdrop-blur-md lg:backdrop-blur-none">
             <span class="block w-6 h-px bg-gallery-black transform rotate-45 translate-y-0.5 transition-transform group-hover:bg-red-500"></span>
             <span class="block w-6 h-px bg-gallery-black transform -rotate-45 -translate-y-0.5 transition-transform group-hover:bg-red-500"></span>
         </button>
@@ -284,7 +294,6 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // --- 1. BANCO DE DADOS DA GALERIA ---
-            // Usamos uma lista maior de IDs do Unsplash para garantir variedade sem quebrar as imagens
             const baseImages = [
                 "1513364776144-60967b0f800f", "1579783900882-c0d3dad7b119", "1605721911519-3dfeb3be25e7",
                 "1561214115-f2f134cc4912", "1536924430914-91f9e2041b83", "1541961017774-22349e4a1262",
@@ -365,8 +374,6 @@
                 const techniques = ["Óleo sobre tela", "Acrílica e areia", "Nanquim sobre papel", "Técnica Mista", "Pigmento mineral", "Impressão Fine Art"];
                 
                 for (let i = 1; i <= 10; i++) {
-                    // Seleciona uma imagem baseada em um cálculo para garantir distribuição,
-                    // e adiciona um parâmetro 'sig' único para garantir que imagens iguais ganhem novas URLs pro cache
                     const imgBaseId = baseImages[(artistIndex * 10 + i) % baseImages.length];
                     const uniqueSig = artistIndex * 10 + i;
                     const imgUrl = `https://images.unsplash.com/photo-${imgBaseId}?auto=format&fit=crop&w=600&h=800&q=80&sig=${uniqueSig}`;
@@ -414,7 +421,7 @@
                 });
 
                 const artistHTML = `
-                    <div class="artist-block reveal-up border-b border-gray-100 pb-16 md:pb-24 last:border-0">
+                    <div class="artist-block reveal-up border-b border-gray-100 pb-16 md:pb-24 last:border-0 w-full">
                         <div class="flex flex-col md:flex-row items-start gap-6 md:gap-10 px-6 lg:px-16 mb-8 md:mb-12">
                             <div class="w-24 h-24 md:w-32 md:h-32 flex-shrink-0">
                                 <img src="${artist.photo}" alt="Foto de ${artist.name}" class="w-full h-full object-cover rounded-full md:rounded-none grayscale hover:grayscale-0 transition-all duration-500">
@@ -466,7 +473,7 @@
                     if (!isDown) return;
                     e.preventDefault();
                     const x = e.pageX - el.offsetLeft;
-                    const walk = (x - startX) * 1.5; // Velocidade do arraste
+                    const walk = (x - startX) * 1.5; 
                     el.scrollLeft = scrollLeft - walk;
                 });
             });
@@ -500,7 +507,7 @@
 
             window.closeLightbox = function() {
                 lightbox.classList.add('hidden-modal');
-                document.body.style.overflow = ''; // Reseta pro padrao
+                document.body.style.overflow = ''; 
             }
 
             window.nextImage = function(e) {
@@ -535,7 +542,6 @@
                 }
             });
 
-            // Intersection Observer para as animações de subida (Reveal)
             const revealElements = document.querySelectorAll('.reveal-up');
             const revealObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
@@ -548,9 +554,10 @@
 
             revealElements.forEach(el => revealObserver.observe(el));
 
-            // Parallax otimizado na Hero Image e Efeito da Navbar
+            // Efeito da Navbar e Parallax otimizado
             const heroImage = document.getElementById('heroImage');
             const navbar = document.getElementById('navbar');
+            const navContainer = document.getElementById('nav-container');
             const mainLogo = document.getElementById('main-logo');
             let ticking = false;
 
@@ -559,20 +566,28 @@
                     window.requestAnimationFrame(() => {
                         const scrollY = window.scrollY;
 
-                        // Lógica para transformar a Navbar ao rolar a tela
+                        // Transformação simplificada e infalível da Navbar
                         if (scrollY > 50) {
-                            navbar.classList.remove('mix-blend-difference', 'text-white', 'md:p-10', 'p-6', 'pointer-events-none');
-                            navbar.classList.add('bg-white/60', 'backdrop-blur-lg', 'text-gallery-black', 'border-b', 'border-white/50', 'shadow-sm', 'py-4', 'px-6', 'md:px-10', 'pointer-events-auto');
-                            mainLogo.classList.remove('invert'); // Retorna a logo para a cor original (preto)
+                            navbar.classList.remove('mix-blend-difference', 'text-white');
+                            navbar.classList.add('bg-white/85', 'backdrop-blur-md', 'text-gallery-black', 'border-b', 'border-gray-200', 'shadow-sm');
+                            
+                            navContainer.classList.remove('py-5', 'md:py-8');
+                            navContainer.classList.add('py-3', 'md:py-4');
+                            
+                            mainLogo.classList.remove('invert');
                         } else {
-                            navbar.classList.add('mix-blend-difference', 'text-white', 'md:p-10', 'p-6', 'pointer-events-none');
-                            navbar.classList.remove('bg-white/60', 'backdrop-blur-lg', 'text-gallery-black', 'border-b', 'border-white/50', 'shadow-sm', 'py-4', 'px-6', 'md:px-10', 'pointer-events-auto');
-                            mainLogo.classList.add('invert'); // Inverte a logo para branco para o efeito de blend
+                            navbar.classList.add('mix-blend-difference', 'text-white');
+                            navbar.classList.remove('bg-white/85', 'backdrop-blur-md', 'text-gallery-black', 'border-b', 'border-gray-200', 'shadow-sm');
+                            
+                            navContainer.classList.add('py-5', 'md:py-8');
+                            navContainer.classList.remove('py-3', 'md:py-4');
+                            
+                            mainLogo.classList.add('invert');
                         }
 
-                        // Aplica o parallax apenas se a tela de hero ainda estiver visível
+                        // Parallax
                         if (scrollY < window.innerHeight) {
-                            heroImage.style.transform = `translateY(${scrollY * 0.3}px)`;
+                            heroImage.style.transform = `translateY(${scrollY * 0.25}px)`;
                         }
                         ticking = false;
                     });
