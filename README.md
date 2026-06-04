@@ -380,15 +380,13 @@
                     const imgBaseId = baseImages[(artistIndex * 10 + i) % baseImages.length];
                     const uniqueSig = artistIndex * 10 + i;
                     
-                    // --- MUDANÇA AQUI: Verifica se é o Tony (index 0) e substitui as imagens ---
                     let imgUrl = `https://images.unsplash.com/photo-${imgBaseId}?auto=format&fit=crop&w=600&h=800&q=80&sig=${uniqueSig}`;
                     
-                    if (artistIndex === 0 && i === 1) {
-                        imgUrl = './tonyobra01.webp';
-                    } else if (artistIndex === 0 && i === 2) {
-                        imgUrl = './tonyobra02.webp';
-                    } else if (artistIndex === 0 && i === 3) {
-                        imgUrl = './tonyobra03.webp';
+                    // --- MUDANÇA AQUI: Automatiza as imagens do Tony (01 até 10) ---
+                    if (artistIndex === 0) {
+                        // PadStart garante que os números de 1 a 9 fiquem como "01", "02", etc.
+                        const imgNumber = i.toString().padStart(2, '0');
+                        imgUrl = `./tonyobra${imgNumber}.webp`;
                     }
                     // ---------------------------------------------------------------------------------
                     
