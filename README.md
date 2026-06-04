@@ -70,7 +70,6 @@
             background: #9ca3af;
         }
 
-        /* --- STREAMING_CHUNK:Styling horizontal scroll and drag functionality... --- */
         /* --- Scroll Horizontal das Mini Galerias --- */
         .horizontal-scroll {
             overflow-x: auto;
@@ -85,9 +84,6 @@
         .horizontal-scroll.is-dragging {
             scroll-behavior: auto;
             scroll-snap-type: none;
-        }
-        .horizontal-scroll.is-dragging > * {
-            pointer-events: none;
         }
         .horizontal-scroll::-webkit-scrollbar {
             display: none;
@@ -104,7 +100,6 @@
             transform: translateY(0);
         }
 
-        /* --- STREAMING_CHUNK:Styling hero image and artwork hover effects... --- */
         /* --- Hero Image Parallax Box --- */
         .hero-img-container {
             clip-path: inset(0);
@@ -210,12 +205,13 @@
     <section id="acervo" class="pt-24 pb-16 bg-gallery-white w-full">
         <div class="max-w-[1800px] mx-auto w-full">
             
-            <div class="text-center mb-24 px-6 reveal-up">
-                <h2 class="text-4xl md:text-5xl font-serif mb-6">Nossos Artistas</h2>
+            <div class="text-center mb-24 px-6 reveal-up w-full">
+                <h2 class="text-4xl md:text-5xl font-serif mb-12">Nossos Artistas</h2>
+                <div class="border-t border-gray-200 w-full mb-8"></div>
                 <div class="flex items-center justify-center gap-4 text-gallery-gray">
-                    <span class="text-lg">←</span>
-                    <p class="font-sans font-light text-xs md:text-sm uppercase tracking-widest">Deslize ou arraste as obras horizontalmente</p>
-                    <span class="text-lg">→</span>
+                    <span class="text-lg -translate-y-[1px]">←</span>
+                    <p class="font-sans font-light text-xs md:text-sm uppercase tracking-[0.25em]">Deslize ou arraste as obras horizontalmente</p>
+                    <span class="text-lg -translate-y-[1px]">→</span>
                 </div>
             </div>
 
@@ -225,38 +221,38 @@
         </div>
     </section>
 
-    <!-- Rodapé -->
-    <footer id="sobre" class="bg-gallery-offwhite py-24 px-8 md:px-16 mt-12 border-t border-gray-200 w-full">
+    <!-- Rodapé PRETO -->
+    <footer id="sobre" class="bg-gallery-black text-white py-24 px-8 md:px-16 mt-12 w-full">
         <div class="max-w-screen-2xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 font-sans">
             <div class="md:col-span-2">
                 <!-- Logo em Imagem no Rodapé -->
-                <img src="./logoboi.png" alt="" class="h-12 md:h-16 w-auto mb-8 object-contain origin-left mix-blend-multiply">
-                <p class="text-base text-gallery-gray font-light max-w-md leading-relaxed">Dedicada a expor as narrativas visuais mais instigantes da arte contemporânea, com exposições imersivas e curatoriais focadas no diálogo entre a materialidade e o espaço.</p>
+                <img src="./logoboi.png" alt="Logo Galeria Boi" class="h-12 md:h-16 w-auto mb-8 object-contain origin-left brightness-0 invert">
+                <p class="text-base text-gray-400 font-light max-w-md leading-relaxed">Dedicada a expor as narrativas visuais mais instigantes da arte contemporânea, com exposições imersivas e curatoriais focadas no diálogo entre a materialidade e o espaço.</p>
             </div>
             <div class="md:col-span-1">
-                <h4 class="uppercase tracking-widest text-xs font-semibold mb-6 text-gallery-black">Localização</h4>
-                <p class="text-sm text-gallery-gray font-light leading-relaxed">
+                <h4 class="uppercase tracking-widest text-xs font-semibold mb-6 text-white">Localização</h4>
+                <p class="text-sm text-gray-400 font-light leading-relaxed">
                     Travessa Mestre Vitalino, 9a<br>
                     Alto do Moura, Caruaru - PE<br>
                     Ter - Sáb, 11h às 19h
                 </p>
             </div>
             <div class="md:col-span-1">
-                <h4 class="uppercase tracking-widest text-xs font-semibold mb-6 text-gallery-black">Contato</h4>
-                <ul class="text-sm text-gallery-gray font-light space-y-3">
-                    <li><a href="mailto:contato@galeriaboi.com" class="hover:text-gallery-black transition-colors">contato@galeriaboi.com</a></li>
-                    <li><a href="#" class="hover:text-gallery-black transition-colors">+55 11 9999-0000</a></li>
-                    <li><a href="https://www.instagram.com/galeriaboi/" target="_blank" rel="noopener noreferrer" class="hover:text-gallery-black transition-colors">Instagram</a></li>
+                <h4 class="uppercase tracking-widest text-xs font-semibold mb-6 text-white">Contato</h4>
+                <ul class="text-sm text-gray-400 font-light space-y-3">
+                    <li><a href="mailto:contato@galeriaboi.com" class="hover:text-white transition-colors">contato@galeriaboi.com</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">+55 11 9999-0000</a></li>
+                    <li><a href="https://www.instagram.com/galeriaboi/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Instagram</a></li>
                 </ul>
             </div>
         </div>
-        <div class="max-w-screen-2xl mx-auto mt-24 pt-8 border-t border-gray-200 text-xs text-gallery-gray flex flex-col md:flex-row justify-between items-center gap-4">
+        <div class="max-w-screen-2xl mx-auto mt-24 pt-8 border-t border-gray-800 text-xs text-gray-500 flex flex-col md:flex-row justify-between items-center gap-4">
             <p>&copy; 2026 Galeria Boi. Todos os direitos reservados.</p>
             <p>Design web otimizado</p>
         </div>
     </footer>
 
-    <!-- Modal Tela Cheia (Lightbox) -->
+    <!-- Modal Tela Cheia (Lightbox) - RESTAURADO E FUNCIONANDO -->
     <div id="lightbox" class="hidden-modal fixed inset-0 z-[110] bg-gallery-white flex flex-col lg:flex-row h-[100dvh]">
         <!-- Botão Fechar -->
         <button aria-label="Fechar galeria" onclick="closeLightbox()" class="absolute top-4 right-4 lg:top-8 lg:right-8 z-[120] p-4 group cursor-pointer bg-white/50 lg:bg-transparent rounded-full backdrop-blur-md lg:backdrop-blur-none">
@@ -297,6 +293,7 @@
         </div>
     </div>
 
+    <!-- JAVASCRIPT COMPLETO E INTACTO -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // --- 1. BANCO DE DADOS DA GALERIA ---
@@ -400,9 +397,9 @@
                 return artworks;
             }
 
-            // --- STREAMING_CHUNK:Rendering artists and horizontal scroll interactions... ---
             // --- 2. RENDERIZAÇÃO DA PÁGINA ---
             const container = document.getElementById('artists-container');
+            window.isDragging = false;
 
             artistProfiles.forEach((artist, index) => {
                 const artistArtworks = generateArtworksForArtist(artist.name, index);
@@ -411,10 +408,10 @@
                 artistArtworks.forEach(art => {
                     artworksHTML += `
                         <div class="w-[260px] md:w-[320px] flex-shrink-0 snap-start group cursor-pointer artwork-card" 
-                             onclick="openLightbox(${art.globalIndex})">
+                             onclick="if(!window.isDragging) openLightbox(${art.globalIndex})">
                             <div class="w-full aspect-[3/4] overflow-hidden bg-gray-100 relative rounded-sm">
                                 <img src="${art.img}" alt="${art.title} por ${art.artist}" loading="lazy" 
-                                     class="w-full h-full object-cover">
+                                     class="w-full h-full object-cover" draggable="false">
                                 <div class="overlay absolute inset-0 flex items-end p-6">
                                     <span class="text-white text-xs tracking-widest uppercase border-b border-white/50 pb-1 font-medium">Ver Detalhes</span>
                                 </div>
@@ -461,6 +458,7 @@
 
                 el.addEventListener('mousedown', (e) => {
                     isDown = true;
+                    window.isDragging = false;
                     el.classList.add('is-dragging');
                     startX = e.pageX - el.offsetLeft;
                     scrollLeft = el.scrollLeft;
@@ -479,13 +477,13 @@
                 el.addEventListener('mousemove', (e) => {
                     if (!isDown) return;
                     e.preventDefault();
+                    window.isDragging = true;
                     const x = e.pageX - el.offsetLeft;
                     const walk = (x - startX) * 1.5; 
                     el.scrollLeft = scrollLeft - walk;
                 });
             });
 
-            // --- STREAMING_CHUNK:Implementing Lightbox and scroll animations... ---
             // --- 3. LÓGICA DO LIGHTBOX ---
             const lightbox = document.getElementById('lightbox');
             const lbImg = document.getElementById('lb-image');
