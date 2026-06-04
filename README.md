@@ -55,6 +55,22 @@
             display: none !important;
         }
 
+        /* --- CORREÇÃO DEFINITIVA DA LOGO --- */
+        .logo-safe {
+            background-color: transparent !important;
+            mix-blend-mode: normal !important;
+            /* Força renderização em GPU limpa no Safari/Chrome, evitando caixas pretas */
+            -webkit-transform: translateZ(0); 
+        }
+        .logo-white {
+            /* Força a logo original (preta) a ficar totalmente branca sem afetar transparência */
+            filter: brightness(0) invert(1) !important;
+        }
+        .logo-original {
+            /* Remove filtros, mantendo a cor nativa do ficheiro SVG (preto) */
+            filter: none !important;
+        }
+
         /* --- Custom Scrollbar --- */
         ::-webkit-scrollbar {
             width: 8px;
@@ -145,21 +161,21 @@
 </head>
 <body class="antialiased selection:bg-gallery-black selection:text-white">
 
-    <!-- Navegação -->
+    <!-- Navegação (Totalmente blindada contra bugs de renderização) -->
     <nav id="navbar" class="fixed top-0 w-full z-[99] transition-all duration-300 pointer-events-none">
         <div id="nav-container" class="flex justify-between items-center px-6 py-5 md:px-12 md:py-8 w-full transition-all duration-300 pointer-events-auto">
             
-            <!-- Logo em Imagem (Apenas 'invert' para ficar branca no topo escuro) -->
-            <img id="main-logo" src="./logoboi.svg" alt="Galeria Boi" class="h-12 md:h-20 w-auto object-contain cursor-pointer transition-all duration-300 origin-left invert" style="mix-blend-mode: normal !important;" onclick="window.scrollTo(0,0)">
+            <!-- Logo blindada com as classes logo-safe e logo-white -->
+            <img id="main-logo" src="./logoboi.svg" alt="Galeria Boi" class="h-12 md:h-20 w-auto object-contain cursor-pointer transition-all duration-300 origin-left logo-safe logo-white" onclick="window.scrollTo(0,0)">
             
             <!-- Desktop Links -->
-            <div id="desktop-links" class="hidden md:flex gap-8 text-sm font-sans tracking-widest uppercase mix-blend-difference text-white transition-colors duration-300">
+            <div id="desktop-links" class="hidden md:flex gap-8 text-sm font-sans tracking-widest uppercase text-white transition-colors duration-300">
                 <a href="#acervo" class="hover:opacity-60 transition-opacity">Acervo</a>
                 <a href="#sobre" class="hover:opacity-60 transition-opacity">A Galeria</a>
             </div>
             
             <!-- Mobile Menu Button -->
-            <div id="mobile-btn" class="md:hidden mix-blend-difference text-white transition-colors duration-300">
+            <div id="mobile-btn" class="md:hidden text-white transition-colors duration-300">
                 <button onclick="toggleMobileMenu()" class="uppercase text-xs tracking-widest hover:opacity-70 transition-opacity">Menu</button>
             </div>
         </div>
@@ -225,8 +241,8 @@
     <footer id="sobre" class="bg-gallery-black text-white py-24 px-8 md:px-16 mt-12 w-full">
         <div class="max-w-screen-2xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 font-sans">
             <div class="md:col-span-2">
-                <!-- Logo no Rodapé (Apenas 'invert' para ficar branca) -->
-                <img src="./logoboi.svg" alt="Logo Galeria Boi" class="h-16 md:h-24 w-auto mb-8 object-contain origin-left invert" style="mix-blend-mode: normal !important;">
+                <!-- Logo no Rodapé blindada (logo-safe + logo-white) -->
+                <img src="./logoboi.svg" alt="Logo Galeria Boi" class="h-16 md:h-24 w-auto mb-8 object-contain origin-left logo-safe logo-white">
                 <p class="text-base text-gray-400 font-light max-w-md leading-relaxed">Dedicada a expor as narrativas visuais mais instigantes da arte contemporânea, com exposições imersivas e curatoriais focadas no diálogo entre a materialidade e o espaço.</p>
             </div>
             
@@ -568,7 +584,7 @@
 
             revealElements.forEach(el => revealObserver.observe(el));
 
-            // Efeito da Navbar
+            // Efeito da Navbar blindado usando as novas classes de CSS puro
             const heroImage = document.getElementById('heroImage');
             const navbar = document.getElementById('navbar');
             const navContainer = document.getElementById('nav-container');
@@ -588,28 +604,31 @@
                             navContainer.classList.remove('py-5', 'md:py-8');
                             navContainer.classList.add('py-3', 'md:py-4');
                             
-                            desktopLinks.classList.remove('mix-blend-difference', 'text-white');
+                            // Cores dos links sem mix-blend para não conflitar
+                            desktopLinks.classList.remove('text-white');
                             desktopLinks.classList.add('text-gallery-black');
                             
-                            mobileBtn.classList.remove('mix-blend-difference', 'text-white');
+                            mobileBtn.classList.remove('text-white');
                             mobileBtn.classList.add('text-gallery-black');
 
-                            // Remove o invert para a logo ficar na cor original (preto) no fundo branco
-                            mainLogo.classList.remove('invert');
+                            // Logo volta para a cor original (preto) aplicando a classe logo-original
+                            mainLogo.classList.remove('logo-white');
+                            mainLogo.classList.add('logo-original');
                         } else {
                             navbar.classList.remove('bg-white/90', 'backdrop-blur-md', 'border-b', 'border-gray-200', 'shadow-sm');
                             
                             navContainer.classList.add('py-5', 'md:py-8');
                             navContainer.classList.remove('py-3', 'md:py-4');
                             
-                            desktopLinks.classList.add('mix-blend-difference', 'text-white');
+                            desktopLinks.classList.add('text-white');
                             desktopLinks.classList.remove('text-gallery-black');
                             
-                            mobileBtn.classList.add('mix-blend-difference', 'text-white');
+                            mobileBtn.classList.add('text-white');
                             mobileBtn.classList.remove('text-gallery-black');
 
-                            // Adiciona o invert para a logo ficar branca no topo escuro
-                            mainLogo.classList.add('invert');
+                            // Logo volta a ficar branca aplicando filtro seguro
+                            mainLogo.classList.remove('logo-original');
+                            mainLogo.classList.add('logo-white');
                         }
 
                         // Parallax
