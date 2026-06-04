@@ -155,7 +155,7 @@
         <div id="nav-container" class="flex justify-between items-center px-6 py-5 md:px-12 md:py-8 w-full transition-all duration-300 pointer-events-auto">
             
             <!-- Logo em Imagem Gigante -->
-            <img id="main-logo" src="./logoboi.png" alt="" class="h-20 md:h-28 w-auto object-contain cursor-pointer invert transition-all duration-300 origin-left" onclick="window.scrollTo(0,0)">
+            <img id="main-logo" src="./logoboi.png" alt="" class="h-20 md:h-28 w-auto object-contain cursor-pointer invert mix-blend-screen transition-all duration-300 origin-left" onclick="window.scrollTo(0,0)">
             
             <!-- Desktop Links -->
             <div class="hidden md:flex gap-8 text-sm font-sans tracking-widest uppercase">
@@ -229,8 +229,8 @@
     <footer id="sobre" class="bg-gallery-offwhite py-24 px-8 md:px-16 mt-12 border-t border-gray-200 w-full">
         <div class="max-w-screen-2xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 font-sans">
             <div class="md:col-span-2">
-                <!-- Logo em Imagem no Rodapé (Gigante) -->
-                <img src="./logoboi.png" alt="" class="h-20 md:h-28 w-auto mb-8 object-contain origin-left">
+                <!-- Logo em Imagem no Rodapé (Gigante e com fundo apagado) -->
+                <img src="./logoboi.png" alt="" class="h-20 md:h-28 w-auto mb-8 object-contain origin-left mix-blend-multiply">
                 <p class="text-base text-gallery-gray font-light max-w-md leading-relaxed">Dedicada a expor as narrativas visuais mais instigantes da arte contemporânea, com exposições imersivas e curatoriais focadas no diálogo entre a materialidade e o espaço.</p>
             </div>
             <div class="md:col-span-1">
@@ -582,7 +582,9 @@
                             navContainer.classList.remove('py-5', 'md:py-8');
                             navContainer.classList.add('py-3', 'md:py-4');
                             
-                            mainLogo.classList.remove('invert');
+                            // Remove a inversão e apaga o fundo branco da imagem
+                            mainLogo.classList.remove('invert', 'mix-blend-screen');
+                            mainLogo.classList.add('mix-blend-multiply');
                         } else {
                             navbar.classList.add('mix-blend-difference', 'text-white');
                             navbar.classList.remove('bg-white/60', 'backdrop-blur-lg', 'text-gallery-black', 'border-b', 'border-gray-200', 'shadow-sm');
@@ -590,7 +592,9 @@
                             navContainer.classList.add('py-5', 'md:py-8');
                             navContainer.classList.remove('py-3', 'md:py-4');
                             
-                            mainLogo.classList.add('invert');
+                            // Inverte a imagem e apaga o fundo "preto" gerado pela inversão
+                            mainLogo.classList.add('invert', 'mix-blend-screen');
+                            mainLogo.classList.remove('mix-blend-multiply');
                         }
 
                         // Parallax
