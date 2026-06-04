@@ -211,10 +211,10 @@
         <div class="max-w-[1800px] mx-auto w-full">
             
             <div class="text-center mb-24 px-6 reveal-up">
-                <h2 class="text-3xl md:text-4xl font-serif mb-4">Nossos Artistas</h2>
+                <h2 class="text-4xl md:text-5xl font-serif mb-6">Nossos Artistas</h2>
                 <div class="flex items-center justify-center gap-4 text-gallery-gray">
                     <span class="text-lg">←</span>
-                    <p class="font-sans font-light text-xs uppercase tracking-widest">Deslize ou arraste as obras horizontalmente</p>
+                    <p class="font-sans font-light text-xs md:text-sm uppercase tracking-widest">Deslize ou arraste as obras horizontalmente</p>
                     <span class="text-lg">→</span>
                 </div>
             </div>
