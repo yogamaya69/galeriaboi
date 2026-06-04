@@ -308,10 +308,10 @@
 
             const artistProfiles = [
                 {
-                    name: "Renata",
-                    role: "Pintura Abstrata",
-                    photo: "renata.png",
-                    bio: "Desafia noções tradicionais de perspectiva. Suas obras exploram a tensão entre o espaço construído e a fluidez do subconsciente."
+                    name: "Tony Granton",
+                    role: "Artista Visual",
+                    photo: "tony.png",
+                    bio: "Toni Graton (Curitiba, PR) é artista visual e gravador, formado pela Escola de Música e Belas Artes do Paraná (UNESPAR, 2017). Atua principalmente com gravura em metal e cerâmica, desenvolvendo uma produção que combina técnicas tradicionais e recursos digitais."
                 },
                 {
                     name: "Clara Luz",
