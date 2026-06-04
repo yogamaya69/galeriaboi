@@ -34,7 +34,7 @@
 
     <style>
         /* --- HACKS ANTI-JEKYLL PARA O GITHUB PAGES --- */
-        /* Estas linhas forçam o Github a não esmagar o nosso layout ao centro */
+        /* Estas linhas forçam o Github a não esmagar o nosso layout ao centro e removem os títulos padrão */
         body, html {
             margin: 0 !important;
             padding: 0 !important;
@@ -43,13 +43,19 @@
             color: #111111;
             overflow-x: hidden;
         }
-        .wrapper, .container-lg, main.page-content, .markdown-body { 
+        .wrapper, .container-lg, main.page-content, .markdown-body, .main-content { 
             max-width: 100% !important; 
             margin: 0 !important; 
             padding: 0 !important; 
+            background: transparent !important;
+            border: none !important;
         }
-        .site-header, .site-footer, header.header { 
+        /* Esconde cabeçalhos e títulos h1 padrão do GitHub Pages */
+        .site-header, .site-footer, header.header, .page-header, body > header { 
             display: none !important; 
+        }
+        .markdown-body h1:first-child, .markdown-body > h1:first-of-type, #project_title {
+            display: none !important;
         }
 
         /* --- Custom Scrollbar --- */
@@ -151,7 +157,7 @@
             
             <!-- Logo em Imagem -->
             <!-- Use object-contain e h-10/12 para garantir que a logo não distorce a barra -->
-            <img id="main-logo" src="./logoboi.png" alt="Logo Galeria Boi" class="h-10 md:h-12 w-auto object-contain cursor-pointer invert transition-all duration-300" onclick="window.scrollTo(0,0)">
+            <img id="main-logo" src="./download.png" alt="" class="h-10 md:h-12 w-auto object-contain cursor-pointer invert transition-all duration-300" onclick="window.scrollTo(0,0)">
             
             <!-- Desktop Links -->
             <div class="hidden md:flex gap-8 text-sm font-sans tracking-widest uppercase">
@@ -177,7 +183,7 @@
     </div>
 
     <!-- Hero Section (Adaptada para Grid e 100% Web) -->
-    <header class="w-full min-h-screen flex flex-col lg:flex-row relative bg-gallery-white">
+    <section id="hero" class="w-full min-h-screen flex flex-col lg:flex-row relative bg-gallery-white">
         <div class="w-full lg:w-[35%] flex flex-col justify-center px-8 md:px-16 pt-32 pb-16 lg:py-0 z-10 min-h-[60vh] lg:min-h-screen">
             <div class="max-w-sm reveal-up active mx-auto lg:mx-0 w-full">
                 <p class="text-gallery-gray text-xs tracking-[0.2em] uppercase mb-4">Acervo Permanente</p>
@@ -198,7 +204,7 @@
                  class="hero-img" 
                  id="heroImage">
         </div>
-    </header>
+    </section>
 
     <!-- Seção Principal: Artistas e Mini Galerias -->
     <section id="acervo" class="pt-24 pb-16 bg-gallery-white w-full">
@@ -224,23 +230,23 @@
         <div class="max-w-screen-2xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 font-sans">
             <div class="md:col-span-2">
                 <!-- Logo em Imagem no Rodapé -->
-                <img src="./download.png" alt="Logo Galeria Boi" class="h-12 w-auto mb-6 object-contain">
+                <img src="./download.png" alt="" class="h-12 w-auto mb-6 object-contain">
                 <p class="text-sm text-gallery-gray font-light max-w-sm">Dedicada a expor as narrativas visuais mais instigantes da arte contemporânea, com exposições imersivas e curatoriais focadas no diálogo entre a materialidade e o espaço.</p>
             </div>
             <div class="md:col-span-1">
                 <h4 class="uppercase tracking-widest text-xs font-semibold mb-6 text-gallery-black">Localização</h4>
                 <p class="text-sm text-gallery-gray font-light leading-relaxed">
-                    Rua Augusta, 2500<br>
-                    Jardins, São Paulo - SP<br>
+                    Travessa Mestre Vitalino, 9a<br>
+                    Alto do Moura, Caruaru - PE<br>
                     Ter - Sáb, 11h às 19h
                 </p>
             </div>
             <div class="md:col-span-1">
                 <h4 class="uppercase tracking-widest text-xs font-semibold mb-6 text-gallery-black">Contato</h4>
                 <ul class="text-sm text-gallery-gray font-light space-y-3">
-                    <li><a href="#" class="hover:text-gallery-black transition-colors">contato@galeriaboi.com</a></li>
+                    <li><a href="mailto:contato@galeriaboi.com" class="hover:text-gallery-black transition-colors">contato@galeriaboi.com</a></li>
                     <li><a href="#" class="hover:text-gallery-black transition-colors">+55 11 9999-0000</a></li>
-                    <li><a href="#" class="hover:text-gallery-black transition-colors">Instagram</a></li>
+                    <li><a href="https://www.instagram.com/galeriaboi/" target="_blank" rel="noopener noreferrer" class="hover:text-gallery-black transition-colors">Instagram</a></li>
                 </ul>
             </div>
         </div>
