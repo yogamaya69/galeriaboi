@@ -205,13 +205,13 @@
     <section id="acervo" class="pt-24 pb-16 bg-gallery-white w-full">
         <div class="max-w-[1800px] mx-auto w-full">
             
-            <div class="text-center mb-24 px-6 reveal-up w-full">
-                <h2 class="text-4xl md:text-5xl font-serif mb-12">Nossos Artistas</h2>
-                <div class="border-t border-gray-200 w-full mb-8"></div>
-                <div class="flex items-center justify-center gap-4 text-gallery-gray">
-                    <span class="text-lg -translate-y-[1px]">←</span>
-                    <p class="font-sans font-light text-xs md:text-sm uppercase tracking-[0.25em]">Deslize ou arraste as obras horizontalmente</p>
-                    <span class="text-lg -translate-y-[1px]">→</span>
+            <div class="text-center mb-16 md:mb-24 px-4 md:px-6 reveal-up w-full">
+                <h2 class="text-4xl md:text-5xl font-serif mb-8 md:mb-12">Nossos Artistas</h2>
+                <div class="border-t border-gray-200 w-full mb-6 md:mb-8"></div>
+                <div class="flex items-center justify-center gap-2 md:gap-4 text-gallery-gray">
+                    <span class="text-base md:text-lg -translate-y-[1px]">←</span>
+                    <p class="font-sans font-light text-[10px] md:text-sm uppercase tracking-widest md:tracking-[0.25em] max-w-[220px] md:max-w-none leading-relaxed md:leading-none">Deslize ou arraste as obras horizontalmente</p>
+                    <span class="text-base md:text-lg -translate-y-[1px]">→</span>
                 </div>
             </div>
 
