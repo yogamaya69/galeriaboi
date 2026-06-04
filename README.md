@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="pt-BR" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
@@ -61,6 +60,17 @@
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
             scrollbar-width: none; /* Firefox */
+            cursor: grab;
+        }
+        .horizontal-scroll:active {
+            cursor: grabbing;
+        }
+        .horizontal-scroll.is-dragging {
+            scroll-behavior: auto; /* Remove suavidade para arrastar sem delay */
+            scroll-snap-type: none; /* Desativa o snap enquanto arrasta */
+        }
+        .horizontal-scroll.is-dragging > * {
+            pointer-events: none; /* Evita cliques acidentais na obra ao soltar o mouse */
         }
         .horizontal-scroll::-webkit-scrollbar {
             display: none; /* Chrome/Safari */
@@ -132,7 +142,7 @@
     <!-- Navegação -->
     <nav id="navbar" class="fixed top-0 w-full z-40 p-6 md:p-10 flex justify-between items-center mix-blend-difference text-white pointer-events-none transition-all duration-300">
         <!-- Logo em Imagem -->
-        <img id="main-logo" src="./download.png" alt="Galeria Boi Logo" class="h-12 md:h-16 w-auto object-contain pointer-events-auto cursor-pointer invert transition-all duration-300" onclick="window.scrollTo(0,0)">
+        <img id="main-logo" src="./download.png" alt="" class="h-12 md:h-16 w-auto object-contain pointer-events-auto cursor-pointer invert transition-all duration-300" onclick="window.scrollTo(0,0)">
         
         <!-- Desktop Links -->
         <div class="hidden md:flex gap-8 text-sm font-sans tracking-widest uppercase pointer-events-auto">
@@ -204,7 +214,7 @@
         <div class="max-w-screen-2xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 font-sans">
             <div class="md:col-span-2">
                 <!-- Logo em Imagem no Rodapé -->
-                <img src="./download.png" alt="Galeria Boi Logo" class="h-12 w-auto mb-6 object-contain">
+                <img src="./download.png" alt="" class="h-12 w-auto mb-6 object-contain">
                 <p class="text-sm text-gallery-gray font-light max-w-sm">Dedicada a expor as narrativas visuais mais instigantes da arte contemporânea, com exposições imersivas e curatoriais focadas no diálogo entre a materialidade e o espaço.</p>
             </div>
             <div class="md:col-span-1">
@@ -426,6 +436,39 @@
                     </div>
                 `;
                 container.insertAdjacentHTML('beforeend', artistHTML);
+            });
+
+            // --- DRAG TO SCROLL (Arraste com o Mouse) ---
+            const scrollContainers = document.querySelectorAll('.horizontal-scroll');
+            scrollContainers.forEach(el => {
+                let isDown = false;
+                let startX;
+                let scrollLeft;
+
+                el.addEventListener('mousedown', (e) => {
+                    isDown = true;
+                    el.classList.add('is-dragging');
+                    startX = e.pageX - el.offsetLeft;
+                    scrollLeft = el.scrollLeft;
+                });
+                
+                el.addEventListener('mouseleave', () => {
+                    isDown = false;
+                    el.classList.remove('is-dragging');
+                });
+                
+                el.addEventListener('mouseup', () => {
+                    isDown = false;
+                    el.classList.remove('is-dragging');
+                });
+                
+                el.addEventListener('mousemove', (e) => {
+                    if (!isDown) return;
+                    e.preventDefault();
+                    const x = e.pageX - el.offsetLeft;
+                    const walk = (x - startX) * 1.5; // Velocidade do arraste
+                    el.scrollLeft = scrollLeft - walk;
+                });
             });
 
             // --- 3. LÓGICA DO LIGHTBOX ---
