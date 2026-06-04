@@ -154,8 +154,8 @@
     <nav id="navbar" class="fixed top-0 w-full z-[99] transition-all duration-300 mix-blend-difference text-white pointer-events-none">
         <div id="nav-container" class="flex justify-between items-center px-6 py-5 md:px-12 md:py-8 w-full transition-all duration-300 pointer-events-auto">
             
-            <!-- Logo em Imagem Gigante -->
-            <img id="main-logo" src="./logoboi.png" alt="" class="h-20 md:h-28 w-auto object-contain cursor-pointer invert mix-blend-screen transition-all duration-300 origin-left" onclick="window.scrollTo(0,0)">
+            <!-- Logo em Imagem -->
+            <img id="main-logo" src="./logoboi.png" alt="" class="h-10 md:h-14 w-auto object-contain cursor-pointer invert mix-blend-screen transition-all duration-300 origin-left" onclick="window.scrollTo(0,0)">
             
             <!-- Desktop Links -->
             <div class="hidden md:flex gap-8 text-sm font-sans tracking-widest uppercase">
@@ -186,7 +186,7 @@
         <div class="w-full lg:w-1/2 flex flex-col justify-center px-8 md:px-16 lg:px-24 pt-32 pb-16 lg:py-0 z-10 min-h-[60vh] lg:min-h-screen">
             <div class="max-w-xl reveal-up active mx-auto lg:mx-0 w-full">
                 <p class="text-gallery-gray text-sm md:text-base tracking-[0.2em] uppercase mb-6 font-medium">Acervo Permanente</p>
-                <h1 class="text-6xl md:text-7xl lg:text-[5.5rem] font-serif leading-none mb-10">10 Vozes.<br>100 Obras.</h1>
+                <h1 class="text-6xl md:text-7xl lg:text-[5.5rem] font-serif leading-none mb-10">NOVA FORNOS</h1>
                 <p class="font-sans text-gallery-gray font-light leading-relaxed mb-12 text-base md:text-lg">
                     Um catálogo imersivo dos artistas mais proeminentes da nossa curadoria. Deslize para baixo para conhecer os criadores e horizontalmente para explorar suas respectivas mini galerias.
                 </p>
@@ -229,8 +229,8 @@
     <footer id="sobre" class="bg-gallery-offwhite py-24 px-8 md:px-16 mt-12 border-t border-gray-200 w-full">
         <div class="max-w-screen-2xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 font-sans">
             <div class="md:col-span-2">
-                <!-- Logo em Imagem no Rodapé (Gigante e com fundo apagado) -->
-                <img src="./logoboi.png" alt="" class="h-20 md:h-28 w-auto mb-8 object-contain origin-left mix-blend-multiply">
+                <!-- Logo em Imagem no Rodapé -->
+                <img src="./logoboi.png" alt="" class="h-12 md:h-16 w-auto mb-8 object-contain origin-left mix-blend-multiply">
                 <p class="text-base text-gallery-gray font-light max-w-md leading-relaxed">Dedicada a expor as narrativas visuais mais instigantes da arte contemporânea, com exposições imersivas e curatoriais focadas no diálogo entre a materialidade e o espaço.</p>
             </div>
             <div class="md:col-span-1">
