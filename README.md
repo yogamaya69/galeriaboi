@@ -151,7 +151,7 @@
             
             <!-- Logo em Imagem -->
             <!-- Use object-contain e h-10/12 para garantir que a logo não distorce a barra -->
-            <img id="main-logo" src="./download.png" alt="Logo Galeria Boi" class="h-10 md:h-12 w-auto object-contain cursor-pointer invert transition-all duration-300" onclick="window.scrollTo(0,0)">
+            <img id="main-logo" src="./logoboi.png" alt="Logo Galeria Boi" class="h-10 md:h-12 w-auto object-contain cursor-pointer invert transition-all duration-300" onclick="window.scrollTo(0,0)">
             
             <!-- Desktop Links -->
             <div class="hidden md:flex gap-8 text-sm font-sans tracking-widest uppercase">
