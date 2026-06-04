@@ -311,9 +311,9 @@
 
             const artistProfiles = [
                 {
-                    name: "Elias Vannucci",
+                    name: "Renata",
                     role: "Pintura Abstrata",
-                    photo: "https://images.unsplash.com/photo-1551192243-7f2a13cc7f39?w=300&h=300&fit=crop&grayscale",
+                    photo: "hrenata.png",
                     bio: "Desafia noções tradicionais de perspectiva. Suas obras exploram a tensão entre o espaço construído e a fluidez do subconsciente."
                 },
                 {
