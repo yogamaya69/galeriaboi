@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="pt-BR" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
@@ -34,7 +35,6 @@
 
     <style>
         /* --- HACKS ANTI-JEKYLL PARA O GITHUB PAGES --- */
-        /* Estas linhas forçam o Github a não esmagar o nosso layout ao centro e removem os títulos padrão */
         body, html {
             margin: 0 !important;
             padding: 0 !important;
@@ -50,7 +50,6 @@
             background: transparent !important;
             border: none !important;
         }
-        /* Esconde cabeçalhos e títulos h1 padrão do GitHub Pages */
         .site-header, .site-footer, header.header, .page-header, body > header { 
             display: none !important; 
         }
@@ -156,8 +155,7 @@
         <div id="nav-container" class="flex justify-between items-center px-6 py-5 md:px-12 md:py-8 w-full transition-all duration-300 pointer-events-auto">
             
             <!-- Logo em Imagem -->
-            <!-- Use object-contain e h-10/12 para garantir que a logo não distorce a barra -->
-            <img id="main-logo" src="./download.png" alt="" class="h-10 md:h-12 w-auto object-contain cursor-pointer invert transition-all duration-300" onclick="window.scrollTo(0,0)">
+            <img id="main-logo" src="./logoboi.png" alt="" class="h-12 md:h-16 w-auto object-contain cursor-pointer invert transition-all duration-300" onclick="window.scrollTo(0,0)">
             
             <!-- Desktop Links -->
             <div class="hidden md:flex gap-8 text-sm font-sans tracking-widest uppercase">
@@ -182,10 +180,10 @@
         </div>
     </div>
 
-    <!-- Hero Section (Adaptada para Grid e 100% Web) -->
+    <!-- Hero Section (Adaptada para Grid e 100% Web com 50/50 split) -->
     <section id="hero" class="w-full min-h-screen flex flex-col lg:flex-row relative bg-gallery-white">
-        <div class="w-full lg:w-[35%] flex flex-col justify-center px-8 md:px-16 pt-32 pb-16 lg:py-0 z-10 min-h-[60vh] lg:min-h-screen">
-            <div class="max-w-sm reveal-up active mx-auto lg:mx-0 w-full">
+        <div class="w-full lg:w-1/2 flex flex-col justify-center px-8 md:px-16 lg:px-24 pt-32 pb-16 lg:py-0 z-10 min-h-[60vh] lg:min-h-screen">
+            <div class="max-w-md reveal-up active mx-auto lg:mx-0 w-full">
                 <p class="text-gallery-gray text-xs tracking-[0.2em] uppercase mb-4">Acervo Permanente</p>
                 <h1 class="text-5xl md:text-6xl font-serif leading-tight mb-8">10 Vozes.<br>100 Obras.</h1>
                 <p class="font-sans text-gallery-gray font-light leading-relaxed mb-10 text-sm">
@@ -198,7 +196,7 @@
             </div>
         </div>
 
-        <div class="w-full lg:w-[65%] h-[50vh] lg:h-screen relative overflow-hidden bg-gray-100 hero-img-container">
+        <div class="w-full lg:w-1/2 h-[50vh] lg:h-screen relative overflow-hidden bg-gray-100 hero-img-container">
             <img src="https://images.unsplash.com/photo-1577720580479-7d839d829c73?q=80&w=2000&auto=format&fit=crop" 
                  alt="Interior da Galeria de Arte" 
                  class="hero-img" 
@@ -230,7 +228,7 @@
         <div class="max-w-screen-2xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 font-sans">
             <div class="md:col-span-2">
                 <!-- Logo em Imagem no Rodapé -->
-                <img src="./download.png" alt="" class="h-12 w-auto mb-6 object-contain">
+                <img src="./logoboi.png" alt="" class="h-16 w-auto mb-6 object-contain">
                 <p class="text-sm text-gallery-gray font-light max-w-sm">Dedicada a expor as narrativas visuais mais instigantes da arte contemporânea, com exposições imersivas e curatoriais focadas no diálogo entre a materialidade e o espaço.</p>
             </div>
             <div class="md:col-span-1">
@@ -451,6 +449,7 @@
                 container.insertAdjacentHTML('beforeend', artistHTML);
             });
 
+            // --- STREAMING_CHUNK:Adding drag functionality and event listeners... ---
             // --- DRAG TO SCROLL (Arraste com o Mouse) ---
             const scrollContainers = document.querySelectorAll('.horizontal-scroll');
             scrollContainers.forEach(el => {
@@ -539,6 +538,7 @@
                 }
             }
 
+            // --- STREAMING_CHUNK:Finalizing scroll observers and animations... ---
             // --- 5. EVENTOS GERAIS (Teclado, Scroll, Observer) ---
             document.addEventListener('keydown', (e) => {
                 if (!lightbox.classList.contains('hidden-modal')) {
@@ -572,10 +572,10 @@
                     window.requestAnimationFrame(() => {
                         const scrollY = window.scrollY;
 
-                        // Transformação simplificada e infalível da Navbar
+                        // Transformação simplificada e infalível da Navbar com efeito de Vidro
                         if (scrollY > 50) {
                             navbar.classList.remove('mix-blend-difference', 'text-white');
-                            navbar.classList.add('bg-white/85', 'backdrop-blur-md', 'text-gallery-black', 'border-b', 'border-gray-200', 'shadow-sm');
+                            navbar.classList.add('bg-white/60', 'backdrop-blur-lg', 'text-gallery-black', 'border-b', 'border-white/50', 'shadow-sm');
                             
                             navContainer.classList.remove('py-5', 'md:py-8');
                             navContainer.classList.add('py-3', 'md:py-4');
@@ -583,7 +583,7 @@
                             mainLogo.classList.remove('invert');
                         } else {
                             navbar.classList.add('mix-blend-difference', 'text-white');
-                            navbar.classList.remove('bg-white/85', 'backdrop-blur-md', 'text-gallery-black', 'border-b', 'border-gray-200', 'shadow-sm');
+                            navbar.classList.remove('bg-white/60', 'backdrop-blur-lg', 'text-gallery-black', 'border-b', 'border-white/50', 'shadow-sm');
                             
                             navContainer.classList.add('py-5', 'md:py-8');
                             navContainer.classList.remove('py-3', 'md:py-4');
