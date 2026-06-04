@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="pt-BR" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
@@ -13,7 +12,6 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Configuração do Tailwind -->
     <script>
         tailwind.config = {
             theme: {
@@ -72,6 +70,7 @@
             background: #9ca3af;
         }
 
+        /* --- STREAMING_CHUNK:Styling horizontal scroll and drag functionality... --- */
         /* --- Scroll Horizontal das Mini Galerias --- */
         .horizontal-scroll {
             overflow-x: auto;
@@ -105,6 +104,7 @@
             transform: translateY(0);
         }
 
+        /* --- STREAMING_CHUNK:Styling hero image and artwork hover effects... --- */
         /* --- Hero Image Parallax Box --- */
         .hero-img-container {
             clip-path: inset(0);
@@ -154,8 +154,8 @@
     <nav id="navbar" class="fixed top-0 w-full z-[99] transition-all duration-300 mix-blend-difference text-white pointer-events-none">
         <div id="nav-container" class="flex justify-between items-center px-6 py-5 md:px-12 md:py-8 w-full transition-all duration-300 pointer-events-auto">
             
-            <!-- Logo em Imagem -->
-            <img id="main-logo" src="./logoboi.png" alt="" class="h-12 md:h-16 w-auto object-contain cursor-pointer invert transition-all duration-300" onclick="window.scrollTo(0,0)">
+            <!-- Logo em Imagem Gigante -->
+            <img id="main-logo" src="./logoboi.png" alt="" class="h-20 md:h-28 w-auto object-contain cursor-pointer invert transition-all duration-300 origin-left" onclick="window.scrollTo(0,0)">
             
             <!-- Desktop Links -->
             <div class="hidden md:flex gap-8 text-sm font-sans tracking-widest uppercase">
@@ -182,22 +182,24 @@
 
     <!-- Hero Section (Adaptada para Grid e 100% Web com 50/50 split) -->
     <section id="hero" class="w-full min-h-screen flex flex-col lg:flex-row relative bg-gallery-white">
+        <!-- Lado do Texto -->
         <div class="w-full lg:w-1/2 flex flex-col justify-center px-8 md:px-16 lg:px-24 pt-32 pb-16 lg:py-0 z-10 min-h-[60vh] lg:min-h-screen">
-            <div class="max-w-md reveal-up active mx-auto lg:mx-0 w-full">
-                <p class="text-gallery-gray text-xs tracking-[0.2em] uppercase mb-4">Acervo Permanente</p>
-                <h1 class="text-5xl md:text-6xl font-serif leading-tight mb-8">10 Vozes.<br>100 Obras.</h1>
-                <p class="font-sans text-gallery-gray font-light leading-relaxed mb-10 text-sm">
+            <div class="max-w-xl reveal-up active mx-auto lg:mx-0 w-full">
+                <p class="text-gallery-gray text-sm md:text-base tracking-[0.2em] uppercase mb-6 font-medium">Acervo Permanente</p>
+                <h1 class="text-6xl md:text-7xl lg:text-[5.5rem] font-serif leading-none mb-10">10 Vozes.<br>100 Obras.</h1>
+                <p class="font-sans text-gallery-gray font-light leading-relaxed mb-12 text-base md:text-lg">
                     Um catálogo imersivo dos artistas mais proeminentes da nossa curadoria. Deslize para baixo para conhecer os criadores e horizontalmente para explorar suas respectivas mini galerias.
                 </p>
-                <a href="#acervo" class="inline-flex items-center gap-4 text-xs uppercase tracking-widest font-medium group pb-2 border-b border-gallery-black/20 hover:border-gallery-black transition-colors">
+                <a href="#acervo" class="inline-flex items-center gap-4 text-sm uppercase tracking-widest font-medium group pb-2 border-b border-gallery-black/20 hover:border-gallery-black transition-colors">
                     Explorar Acervo
                     <span class="transform transition-transform group-hover:translate-y-1">↓</span>
                 </a>
             </div>
         </div>
 
+        <!-- Lado da Imagem com o ficheiro galeria.jpg -->
         <div class="w-full lg:w-1/2 h-[50vh] lg:h-screen relative overflow-hidden bg-gray-100 hero-img-container">
-            <img src="https://images.unsplash.com/photo-1577720580479-7d839d829c73?q=80&w=2000&auto=format&fit=crop" 
+            <img src="./galeria.jpg" 
                  alt="Interior da Galeria de Arte" 
                  class="hero-img" 
                  id="heroImage">
@@ -227,9 +229,9 @@
     <footer id="sobre" class="bg-gallery-offwhite py-24 px-8 md:px-16 mt-12 border-t border-gray-200 w-full">
         <div class="max-w-screen-2xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 font-sans">
             <div class="md:col-span-2">
-                <!-- Logo em Imagem no Rodapé -->
-                <img src="./logoboi.png" alt="" class="h-16 w-auto mb-6 object-contain">
-                <p class="text-sm text-gallery-gray font-light max-w-sm">Dedicada a expor as narrativas visuais mais instigantes da arte contemporânea, com exposições imersivas e curatoriais focadas no diálogo entre a materialidade e o espaço.</p>
+                <!-- Logo em Imagem no Rodapé (Gigante) -->
+                <img src="./logoboi.png" alt="" class="h-20 md:h-28 w-auto mb-8 object-contain origin-left">
+                <p class="text-base text-gallery-gray font-light max-w-md leading-relaxed">Dedicada a expor as narrativas visuais mais instigantes da arte contemporânea, com exposições imersivas e curatoriais focadas no diálogo entre a materialidade e o espaço.</p>
             </div>
             <div class="md:col-span-1">
                 <h4 class="uppercase tracking-widest text-xs font-semibold mb-6 text-gallery-black">Localização</h4>
@@ -398,6 +400,7 @@
                 return artworks;
             }
 
+            // --- STREAMING_CHUNK:Rendering artists and horizontal scroll interactions... ---
             // --- 2. RENDERIZAÇÃO DA PÁGINA ---
             const container = document.getElementById('artists-container');
 
@@ -449,7 +452,6 @@
                 container.insertAdjacentHTML('beforeend', artistHTML);
             });
 
-            // --- STREAMING_CHUNK:Adding drag functionality and event listeners... ---
             // --- DRAG TO SCROLL (Arraste com o Mouse) ---
             const scrollContainers = document.querySelectorAll('.horizontal-scroll');
             scrollContainers.forEach(el => {
@@ -483,6 +485,7 @@
                 });
             });
 
+            // --- STREAMING_CHUNK:Implementing Lightbox and scroll animations... ---
             // --- 3. LÓGICA DO LIGHTBOX ---
             const lightbox = document.getElementById('lightbox');
             const lbImg = document.getElementById('lb-image');
@@ -538,7 +541,6 @@
                 }
             }
 
-            // --- STREAMING_CHUNK:Finalizing scroll observers and animations... ---
             // --- 5. EVENTOS GERAIS (Teclado, Scroll, Observer) ---
             document.addEventListener('keydown', (e) => {
                 if (!lightbox.classList.contains('hidden-modal')) {
@@ -572,10 +574,10 @@
                     window.requestAnimationFrame(() => {
                         const scrollY = window.scrollY;
 
-                        // Transformação simplificada e infalível da Navbar com efeito de Vidro
+                        // Transformação simplificada e infalível da Navbar
                         if (scrollY > 50) {
                             navbar.classList.remove('mix-blend-difference', 'text-white');
-                            navbar.classList.add('bg-white/60', 'backdrop-blur-lg', 'text-gallery-black', 'border-b', 'border-white/50', 'shadow-sm');
+                            navbar.classList.add('bg-white/60', 'backdrop-blur-lg', 'text-gallery-black', 'border-b', 'border-gray-200', 'shadow-sm');
                             
                             navContainer.classList.remove('py-5', 'md:py-8');
                             navContainer.classList.add('py-3', 'md:py-4');
@@ -583,7 +585,7 @@
                             mainLogo.classList.remove('invert');
                         } else {
                             navbar.classList.add('mix-blend-difference', 'text-white');
-                            navbar.classList.remove('bg-white/60', 'backdrop-blur-lg', 'text-gallery-black', 'border-b', 'border-white/50', 'shadow-sm');
+                            navbar.classList.remove('bg-white/60', 'backdrop-blur-lg', 'text-gallery-black', 'border-b', 'border-gray-200', 'shadow-sm');
                             
                             navContainer.classList.add('py-5', 'md:py-8');
                             navContainer.classList.remove('py-3', 'md:py-4');
