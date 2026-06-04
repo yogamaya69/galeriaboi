@@ -145,12 +145,12 @@
 </head>
 <body class="antialiased selection:bg-gallery-black selection:text-white">
 
-    <!-- Navegação (Refatorada para remover fundo branco da logo) -->
+    <!-- Navegação (Refatorada usando filtros puros sem mix-blend para a logo) -->
     <nav id="navbar" class="fixed top-0 w-full z-[99] transition-all duration-300 pointer-events-none">
         <div id="nav-container" class="flex justify-between items-center px-6 py-5 md:px-12 md:py-8 w-full transition-all duration-300 pointer-events-auto">
             
-            <!-- Logo em Imagem aumentada (h-12 no mobile, h-20 no desktop) -->
-            <img id="main-logo" src="./logoboi.svg" alt="" class="h-12 md:h-20 w-auto object-contain cursor-pointer mix-blend-multiply transition-all duration-300 origin-left" onclick="window.scrollTo(0,0)">
+            <!-- Logo em Imagem (Começa com invert e brightness-0 para ficar totalmente branca) -->
+            <img id="main-logo" src="./logoboi.svg" alt="Galeria Boi" class="h-12 md:h-20 w-auto object-contain cursor-pointer transition-all duration-300 origin-left invert brightness-0" onclick="window.scrollTo(0,0)">
             
             <!-- Desktop Links -->
             <div id="desktop-links" class="hidden md:flex gap-8 text-sm font-sans tracking-widest uppercase mix-blend-difference text-white transition-colors duration-300">
@@ -175,7 +175,7 @@
         </div>
     </div>
 
-    <!-- Hero Section (Adaptada para Grid e 100% Web com 50/50 split) -->
+    <!-- Hero Section -->
     <section id="hero" class="w-full min-h-screen flex flex-col lg:flex-row relative bg-gallery-white">
         <!-- Lado do Texto -->
         <div class="w-full lg:w-1/2 flex flex-col justify-center px-8 md:px-16 lg:px-24 pt-32 pb-16 lg:py-0 z-10 min-h-[60vh] lg:min-h-screen">
@@ -215,7 +215,7 @@
                 </div>
             </div>
 
-            <!-- O JavaScript injetará os 10 artistas aqui -->
+            <!-- O JavaScript injetará os artistas aqui -->
             <div id="artists-container" class="flex flex-col gap-16 md:gap-24 w-full"></div>
 
         </div>
@@ -225,12 +225,11 @@
     <footer id="sobre" class="bg-gallery-black text-white py-24 px-8 md:px-16 mt-12 w-full">
         <div class="max-w-screen-2xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 font-sans">
             <div class="md:col-span-2">
-                <!-- Logo em Imagem no Rodapé aumentada (h-16 no mobile, h-24 no desktop) -->
-                <img src="./logoboi.svg" alt="Logo Galeria Boi" class="h-16 md:h-24 w-auto mb-8 object-contain origin-left invert mix-blend-screen">
+                <!-- Logo no Rodapé com filtro invert nativo (sem bugs de bloco branco) -->
+                <img src="./logoboi.svg" alt="Logo Galeria Boi" class="h-16 md:h-24 w-auto mb-8 object-contain origin-left invert brightness-0">
                 <p class="text-base text-gray-400 font-light max-w-md leading-relaxed">Dedicada a expor as narrativas visuais mais instigantes da arte contemporânea, com exposições imersivas e curatoriais focadas no diálogo entre a materialidade e o espaço.</p>
             </div>
             
-            <!-- Coluna Localização com Diagramação Forçada -->
             <div class="md:col-span-1 flex flex-col items-start text-left w-full">
                 <h4 class="uppercase tracking-widest text-xs font-semibold mb-6 text-white w-full">Localização</h4>
                 <p class="text-sm text-gray-400 font-light leading-relaxed w-full">
@@ -240,7 +239,6 @@
                 </p>
             </div>
             
-            <!-- Coluna Contato com Diagramação Forçada -->
             <div class="md:col-span-1 flex flex-col items-start text-left w-full">
                 <h4 class="uppercase tracking-widest text-xs font-semibold mb-6 text-white w-full">Contato</h4>
                 <ul class="text-sm text-gray-400 font-light space-y-3 w-full p-0 m-0">
@@ -256,7 +254,7 @@
         </div>
     </footer>
 
-    <!-- Modal Tela Cheia (Lightbox) - RESTAURADO E FUNCIONANDO -->
+    <!-- Modal Tela Cheia (Lightbox) -->
     <div id="lightbox" class="hidden-modal fixed inset-0 z-[110] bg-gallery-white flex flex-col lg:flex-row h-[100dvh]">
         <!-- Botão Fechar -->
         <button aria-label="Fechar galeria" onclick="closeLightbox()" class="absolute top-4 right-4 lg:top-8 lg:right-8 z-[120] p-4 group cursor-pointer bg-white/50 lg:bg-transparent rounded-full backdrop-blur-md lg:backdrop-blur-none">
@@ -297,7 +295,7 @@
         </div>
     </div>
 
-    <!-- JAVASCRIPT COMPLETO E INTACTO -->
+    <!-- JAVASCRIPT -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // --- 1. BANCO DE DADOS DA GALERIA ---
@@ -386,12 +384,10 @@
                     
                     let imgUrl = `https://images.unsplash.com/photo-${imgBaseId}?auto=format&fit=crop&w=600&h=800&q=80&sig=${uniqueSig}`;
                     
-                    // --- Automatiza as imagens do Tony (01 até 10) ---
                     if (artistIndex === 0) {
                         const imgNumber = i.toString().padStart(2, '0');
                         imgUrl = `./tonyobra${imgNumber}.webp`;
                     }
-                    // --------------------------------------------------
                     
                     const artwork = {
                         globalIndex: allArtworks.length, 
@@ -572,12 +568,13 @@
 
             revealElements.forEach(el => revealObserver.observe(el));
 
-            // Efeito da Navbar simplificado para corrigir o bug do fundo branco
+            // Efeito da Navbar ajustado usando apenas filtros CSS
             const heroImage = document.getElementById('heroImage');
             const navbar = document.getElementById('navbar');
             const navContainer = document.getElementById('nav-container');
             const desktopLinks = document.getElementById('desktop-links');
             const mobileBtn = document.getElementById('mobile-btn');
+            const mainLogo = document.getElementById('main-logo');
             let ticking = false;
 
             window.addEventListener('scroll', () => {
@@ -591,24 +588,28 @@
                             navContainer.classList.remove('py-5', 'md:py-8');
                             navContainer.classList.add('py-3', 'md:py-4');
                             
-                            // Os links perdem a cor invertida e ficam cinza/preto no fundo branco
                             desktopLinks.classList.remove('mix-blend-difference', 'text-white');
                             desktopLinks.classList.add('text-gallery-black');
                             
                             mobileBtn.classList.remove('mix-blend-difference', 'text-white');
                             mobileBtn.classList.add('text-gallery-black');
+
+                            // Menu com fundo branco: A logo volta para sua cor natural (Preto)
+                            mainLogo.classList.remove('invert', 'brightness-0');
                         } else {
                             navbar.classList.remove('bg-white/90', 'backdrop-blur-md', 'border-b', 'border-gray-200', 'shadow-sm');
                             
                             navContainer.classList.add('py-5', 'md:py-8');
                             navContainer.classList.remove('py-3', 'md:py-4');
                             
-                            // Links voltam a inverter de cor para poderem ser lidos sobre a foto Hero
                             desktopLinks.classList.add('mix-blend-difference', 'text-white');
                             desktopLinks.classList.remove('text-gallery-black');
                             
                             mobileBtn.classList.add('mix-blend-difference', 'text-white');
                             mobileBtn.classList.remove('text-gallery-black');
+
+                            // Topo da página: A logo recebe o filtro para ficar Branca
+                            mainLogo.classList.add('invert', 'brightness-0');
                         }
 
                         // Parallax
