@@ -387,6 +387,8 @@
                         imgUrl = './tonyobra01.webp';
                     } else if (artistIndex === 0 && i === 2) {
                         imgUrl = './tonyobra02.webp';
+                    } else if (artistIndex === 0 && i === 3) {
+                        imgUrl = './tonyobra03.webp';
                     }
                     // ---------------------------------------------------------------------------------
                     
