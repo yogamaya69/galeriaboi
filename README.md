@@ -313,7 +313,7 @@
                 {
                     name: "Renata",
                     role: "Pintura Abstrata",
-                    photo: "hrenata.png",
+                    photo: "/renata.png",
                     bio: "Desafia noções tradicionais de perspectiva. Suas obras exploram a tensão entre o espaço construído e a fluidez do subconsciente."
                 },
                 {
